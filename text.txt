@@ -1,0 +1,29 @@
+% Fundamental Algebra
+E = mc^2 \\ % Einstein's Mass-Energy Equivalence
+
+% Calculus
+\textbf{Differentiation} \\
+\frac{dy}{dx} = \lim_{\Delta x \to 0} \frac{f(x+\Delta x) - f(x)}{\Delta x} \\
+
+\textbf{Integration} \\
+\int_a^b f(x) \,dx = F(b) - F(a) \\
+
+% Trigonometry
+\sin^2(\theta) + \cos^2(\theta) = 1 \\
+\tan(\theta) = \frac{\sin(\theta)}{\cos(\theta)} \\
+
+% Linear Algebra
+\mathbf{Ax} = \mathbf{b} \\ % System of Linear Equations
+\text{Determinant: } \det(\mathbf{A}) \\
+
+% Engineering Mechanics
+\textbf{Hooke's Law:} \sigma = E \cdot \epsilon \\
+
+\textbf{Euler-Bernoulli Beam Equation:} \frac{d^2}{dx^2} y(x) \sim \\ \\
+
+% fuckey fuckey formula devised by aradhya
+\textbf{fucksigive} \ligma = 0 \\
+
+Sheldon's Formula:
+Slavery = profit
+devised by sheldon periperi
