@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Natural Query Interface</title>
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Center container with padding */
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header styling */
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        h3 {
+            color: #34495e;
+            margin-top: 20px;
+            border-bottom: 2px solid #dfe6e9;
+            padding-bottom: 5px;
+        }
+
+        /* Textarea styling */
+        textarea {
+            width: 100%;
+            min-height: 100px;
+            margin-bottom: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            border: 1px solid #ced6e0;
+            border-radius: 4px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            resize: vertical;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #74b9ff;
+            box-shadow: 0 0 5px rgba(116, 185, 255, 0.5);
+        }
+
+        /* Button styling */
+        button {
+            background-color: #0984e3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #74b9ff;
+        }
+
+        button:disabled {
+            background-color: #dcdde1;
+            cursor: not-allowed;
+        }
+
+        /* Dropdown menu styling */
+        select {
+            padding: 10px;
+            border: 1px solid #ced6e0;
+            border-radius: 4px;
+            background-color: #ffffff;
+            cursor: pointer;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #74b9ff;
+            box-shadow: 0 0 5px rgba(116, 185, 255, 0.5);
+        }
+
+        /* Table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #ffffff;
+        }
+
+        th, td {
+            border: 1px solid #dfe6e9;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #2c3e50;
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #dfe6e9;
+        }
+
+        /* Message styling */
+        .message {
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>QueryGenie</h1>
+
+        <!-- Natural Language Query -->
+        <form method="POST">
+            <label for="natural_query">Enter your command in natural language:</label><br>
+            <textarea id="natural_query" name="natural_query" placeholder="e.g., Show all students who failed">{{ natural_query }}</textarea><br>
+            <button type="submit">Generate SQL</button>
+        </form>
+
+        <!-- Suggested SQL Query -->
+        <h3>SQL Query:</h3>
+        <form method="POST">
+            <textarea id="suggested_query" name="suggested_query" placeholder="suggested SQL query will appear here">{{ suggested_query }}</textarea><br>
+            <button type="submit" name="execute_query">Execute Query</button>
+        </form>
+
+        {% if message %}
+            <div class="message {% if 'Error' in message %}error{% else %}success{% endif %}">
+                {{ message }}
+            </div>
+        {% endif %}
+
+        {% if result %}
+            <!-- Query Results -->
+            <h3>Query Results:</h3>
+            <table>
+                <thead>
+                    <tr>
+                        {% for column in result.columns %}
+                            <th>{{ column }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in result.rows %}
+                        <tr>
+                            {% for cell in row %}
+                                <td>{{ cell }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+
+        <!-- Show Tables -->
+        <h3>View Table Contents:</h3>
+        <form method="POST">
+            <select name="table_name">
+                <option value="">-- Select Table --</option>
+                {% for table in tables %}
+                    <option value="{{ table }}" {% if table == selected_table %}selected{% endif %}>
+                        {{ table }}
+                    </option>
+                {% endfor %}
+            </select>
+            <button type="submit">Show Table</button>
+        </form>
+
+        {% if table_data %}
+            <h3>Table: {{ selected_table }}</h3>
+            <table>
+                <thead>
+                    <tr>
+                        {% for column in table_columns %}
+                            <th>{{ column }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in table_data %}
+                        <tr>
+                            {% for cell in row %}
+                                <td>{{ cell }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+</body>
+</html>
