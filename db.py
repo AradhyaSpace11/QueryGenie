@@ -30,7 +30,7 @@ def execute_sql(sql_query):
         conn.close()
 
 def get_table_names():
-    """Get all table names from database"""
+    """Get table names from database"""
     conn = sqlite3.connect(db_name)
     cursor = conn.cursor()
     cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
