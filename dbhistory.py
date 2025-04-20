@@ -1,7 +1,7 @@
 import google.generativeai as genai
 
 # Configure the Gemini API with your API key
-API_KEY = "AIzaSyAZsRTDVpsPRhHpezqaIc2ZvanreBv0Xx4"
+API_KEY = ""
 genai.configure(api_key=API_KEY)
 
 # Initialize the Gemini model
