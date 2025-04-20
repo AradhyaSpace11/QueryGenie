@@ -12,7 +12,7 @@ db_name = "local_database.db"
 
 # Pinecone and Gemini Configuration
 pc = Pinecone(
-    api_key="pcsk_327fZT_9n2i2FHdK1rXvfFN2RK2i4Z7edicDFE7sSFmyE1bVuGgjjZfAUXUtncrqyUk1Am"  # Replace with your Pinecone API key
+    api_key=""  # Replace with your Pinecone API key
 )
 index_name = "formulae-index"  # Ensure this matches the trained index
 index = pc.Index(index_name)
