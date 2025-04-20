@@ -17,7 +17,7 @@ pc = Pinecone(
 index_name = "formulae-index"  # Ensure this matches the trained index
 index = pc.Index(index_name)
 embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/multi-qa-mpnet-base-dot-v1")
-API_KEY = "AIzaSyAZsRTDVpsPRhHpezqaIc2ZvanreBv0Xx4"
+API_KEY = ""
 genai.configure(api_key=API_KEY)
 gemini_model = genai.GenerativeModel("gemini-1.5-flash")
 
